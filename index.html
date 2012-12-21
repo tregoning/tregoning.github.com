@@ -5,6 +5,25 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<h1>Coming soon...</h1>
+	<h1>Coming soon...</h1><h2 id="timer"></h2>
+	<script>
+		var dt1 = new Date().getTime();
+
+var keys = ['BorderRadius','MozBorderRadius','WebkitBorderRadius','OBorderRadius','KhtmlBorderRadius'];
+	isBorderRadiusSupported = false;
+
+for( var i=0;i<x.length;i++ ){
+	console.log(i);
+	if(typeof document.body.style[keys[i]] !== 'undefined'){
+		isBorderRadiusSupported = true;
+		break;
+	}
+}
+
+var dt2 = new Date().getTime();
+
+	document.getElementById("timer").innerHTML(dt2 - dt1);
+
+	</script>
 </body>
 </html>
