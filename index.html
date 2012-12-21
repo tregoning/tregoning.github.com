@@ -6,26 +6,5 @@
 </head>
 <body>
 	<h1>Coming soon...</h1><h2 id="timer"></h2>
-	
-	<script>
-	
-	var dt1 = new Date().getTime();
-
-var keys = ['borderRadius','MozBorderRadius','WebkitBorderRadius','OBorderRadius','KhtmlBorderRadius'],
-	style = document.body.style,
-	isBorderRadiusSupported = false;
-
-for( var i=0,l=keys.length;i<keys.length;i++ ){
-	if(typeof style[keys[i]] !== 'undefined'){
-		isBorderRadiusSupported = true;
-		break;
-	}
-}
-
-var dt2 = new Date().getTime();
-
-alert(isBorderRadiusSupported  + " " + (dt2 - dt1) );
-</script>
-
 </body>
 </html>
