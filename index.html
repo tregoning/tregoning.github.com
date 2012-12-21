@@ -11,11 +11,12 @@
 	
 	var dt1 = new Date().getTime();
 
-var keys = ['BorderRadius','MozBorderRadius','WebkitBorderRadius','OBorderRadius','KhtmlBorderRadius'],
+var keys = ['borderRadius','MozBorderRadius','WebkitBorderRadius','OBorderRadius','KhtmlBorderRadius'],
+	style = document.body.style,
 	isBorderRadiusSupported = false;
 
-for( var i=0;i<keys.length;i++ ){
-	if(typeof document.body.style[keys[i]] !== 'undefined'){
+for( var i=0,l=keys.length;i<keys.length;i++ ){
+	if(typeof style[keys[i]] !== 'undefined'){
 		isBorderRadiusSupported = true;
 		break;
 	}
