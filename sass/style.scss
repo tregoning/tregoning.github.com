@@ -1,0 +1,115 @@
+@import "compass";
+@import "compass/reset";
+
+$black: #000;
+$jetBlack: #333;
+$darkGray: #777;
+$lightGray: #ccc;
+$blue: #5E5E5E;
+$articleWidth: 780px;
+
+
+@mixin font-smoothing($font-smoothing) { 
+  //none | antialiased | subpixel-antialiased
+  -webkit-font-smoothing: $font-smoothing;
+     -moz-font-smoothing: $font-smoothing;
+      -ms-font-smoothing: $font-smoothing;
+          font-smoothing: $font-smoothing;
+}
+
+body{
+	width: 940px;
+	margin: 0 auto;
+	padding: 0 10px;
+	font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	color: $jetBlack;
+	text-rendering: optimizeLegibility;
+	@include font-smoothing('antialiased');
+	&>header{
+		border-bottom:1px solid $lightGray;
+	}
+}
+
+a{
+	color:$blue;
+	text-decoration:none;
+	&:hover{
+		text-decoration:underline;
+	}
+}
+
+h1{
+	color: $black;
+	font-size: 35px;
+	margin: 40px 0 7px 0;
+}
+
+h2{
+	font-size: 18px;
+	font-weight: 200;
+	color: $darkGray;
+	margin-bottom: 15px;
+}
+
+aside{
+	float: right;
+	max-width: 150px;
+	margin-top: 50px;
+	li{
+		line-height:1.8;
+	}
+}
+
+article{
+	float: left;
+	width: $articleWidth;
+	font-size: 18px;
+	line-height: 1.7;
+	padding-bottom: 35px;
+	border-bottom: 1px dotted $lightGray;
+	
+	h1{
+		font-size: 25px;
+		font-weight: 300;
+		max-width: 650px;
+		float: left;
+		line-height: 1.2;
+		margin-bottom: 15px;
+	}
+	
+	time{
+		margin-top: 43px;
+		font-size: 18px;
+		color: $darkGray;
+		float: right;
+	}
+	
+	&:last-of-type{
+		border-bottom: none;
+	}
+}
+
+#disqus_thread{
+	margin-top: 35px;
+	width: $articleWidth;
+	float: left;
+}
+
+/*Tools (need to be moved into a different file)*/
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
