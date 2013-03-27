@@ -5,6 +5,7 @@ $black: #000;
 $jetBlack: #333;
 $darkGray: #777;
 $lightGray: #ccc;
+$evenLighterGray: #eee;
 $blue: #5E5E5E;
 $articleWidth: 780px;
 
@@ -66,6 +67,19 @@ article{
 	line-height: 1.7;
 	padding-bottom: 35px;
 	border-bottom: 1px dotted $lightGray;
+
+	img{
+		display: block;
+		margin: 20px auto;
+	}
+
+	small{
+		display: block;
+		text-align: right;
+		color: $lightGray;
+		font-size: 10px;
+		@include font-smoothing('subpixel-antialiased'); 
+	}
 	
 	h1{
 		font-size: 25px;
@@ -73,7 +87,7 @@ article{
 		max-width: 650px;
 		float: left;
 		line-height: 1.2;
-		margin-bottom: 15px;
+		margin-bottom: 5px;
 	}
 	
 	time{
@@ -81,6 +95,19 @@ article{
 		font-size: 18px;
 		color: $darkGray;
 		float: right;
+	}
+
+	pre{
+		background-color: $evenLighterGray;
+		font-family: monospace;
+		padding: 8px;
+		margin: 15px 0;
+		color: $black;
+		font-size: 15px;
+	}
+
+	p{
+		margin: 20px 0;
 	}
 	
 	&:last-of-type{
@@ -92,6 +119,30 @@ article{
 	margin-top: 35px;
 	width: $articleWidth;
 	float: left;
+}
+
+/* about page
+---------------------------*/
+#me{
+	display: block;
+	width: 320px;
+	height: 320px;
+	@include border-radius(500px);
+	border: 5px solid #000;
+	background: url(http://s3.jt.io/me.jpg) no-repeat 0 0;
+	margin: 30px auto 0;
+	&:hover{
+		background-position: right 0;
+	}
+
+}
+
+.about h1{
+	font-size: 30px;
+}
+
+.about ul a{
+	text-decoration: none;
 }
 
 /*Tools (need to be moved into a different file)*/
