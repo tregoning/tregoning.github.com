@@ -88,6 +88,10 @@ article{
 		float: left;
 		line-height: 1.2;
 		margin-bottom: 5px;
+
+		a{
+			color: $black;
+		}
 	}
 	
 	time{
@@ -116,7 +120,6 @@ article{
 }
 
 #disqus_thread{
-	margin-top: 35px;
 	width: $articleWidth;
 	float: left;
 }
