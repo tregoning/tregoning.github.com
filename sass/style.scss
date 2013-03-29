@@ -168,3 +168,25 @@ article{
 .cf {
     *zoom: 1;
 }
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media (max-width: 767px) {
+	aside{
+		float: none;
+		max-width: none;
+		margin-top: 20px;
+		font-size: 20px;
+		ul{
+			display: block;
+			float: left;
+		}
+		li{
+			float: left;
+			margin-right: 20px;
+		}
+	}
+	article{
+		width: auto;
+	}
+}
