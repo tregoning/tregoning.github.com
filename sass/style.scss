@@ -71,6 +71,7 @@ article{
 	img{
 		display: block;
 		margin: 20px auto;
+		clear: both;
 	}
 
 	small{
@@ -142,7 +143,7 @@ article{
 
 }
 
-.about h1{
+.about article h1{
 	font-size: 30px;
 }
 
@@ -170,7 +171,6 @@ article{
 }
 
 
-/* Smartphones (portrait and landscape) ----------- */
 @media screen and (max-width: 959px) {
 
 	aside{
@@ -186,8 +186,10 @@ article{
 			float: left;
 			margin-right: 20px;
 		}
+
 	}
-	article{
-		width: 100%;
+	article,
+	#disqus_thread{
+		width: 940px;
 	}
 }
