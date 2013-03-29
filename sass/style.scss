@@ -116,12 +116,12 @@ article{
 	
 	&:last-of-type{
 		border-bottom: none;
-		padding-bottom: 30px;
+		padding-bottom: 25px;
 	}
 }
 
 #disqus_thread{
-	margin-top: 5px;
+	margin-top: 10px;
 	width: $articleWidth;
 	float: left;
 }
