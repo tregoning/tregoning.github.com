@@ -171,7 +171,8 @@ article{
 
 
 /* Smartphones (portrait and landscape) ----------- */
-@media (max-width: 959px) {
+@media screen and (max-width: 959px) {
+
 	aside{
 		float: none;
 		max-width: none;
