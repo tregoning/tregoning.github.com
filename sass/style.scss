@@ -172,6 +172,10 @@ article{
 
 @media screen and (max-width: 959px) {
 
+	body{
+		width: $articleWidth;
+	}
+
 	aside{
 		float: none;
 		max-width: none;
