@@ -1,6 +1,7 @@
 @import "compass";
 @import "compass/reset";
 
+$white: #fff;
 $black: #000;
 $jetBlack: #333;
 $darkGray: #777;
@@ -15,6 +16,10 @@ $articleWidth: 780px;
      -moz-font-smoothing: $font-smoothing;
       -ms-font-smoothing: $font-smoothing;
           font-smoothing: $font-smoothing;
+}
+
+html{
+	background-color: $white;
 }
 
 body{

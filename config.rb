@@ -4,7 +4,7 @@
 http_path = "/"
 css_dir = "css"
 sass_dir = "sass"
-sass_path = "/Users/johntre/code/projects/tregoning.github.com/sass"
+sass_path = "/Users/johntre/myProjects/tregoning.github.com/sass"
 images_dir = "img"
 javascripts_dir = "js"
 
