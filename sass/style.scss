@@ -73,10 +73,15 @@ article{
 	padding-bottom: 35px;
 	border-bottom: 1px dotted $lightGray;
 
+	header{
+		margin-top: 40px;
+	}
+
 	img{
 		display: block;
 		margin: 20px auto;
 		clear: both;
+		width: 640px;
 	}
 
 	small{
@@ -94,6 +99,7 @@ article{
 		float: left;
 		line-height: 1.2;
 		margin-bottom: 5px;
+		margin-top: 0;
 
 		a{
 			color: $black;
@@ -101,8 +107,8 @@ article{
 	}
 	
 	time{
-		margin-top: 43px;
 		font-size: 18px;
+		margin-top: 3px;
 		color: $darkGray;
 		float: right;
 	}
@@ -128,8 +134,7 @@ article{
 
 #disqus_thread{
 	margin-top: 10px;
-	width: $articleWidth;
-	float: left;
+	margin-right: 160px;
 }
 
 /* about page
@@ -148,10 +153,6 @@ article{
 
 }
 
-.about article h1{
-	font-size: 30px;
-}
-
 .about ul a{
 	text-decoration: none;
 }
@@ -159,8 +160,8 @@ article{
 /*Tools (need to be moved into a different file)*/
 .cf:before,
 .cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    display: table;
 }
 
 .cf:after {
@@ -196,5 +197,46 @@ article{
 		}
 
 	}
+
+	#disqus_thread{
+		margin-right: 0;
+	}
 	
+}
+
+@media screen and (max-width: $articleWidth) {
+
+	body{
+		width: auto;
+	}
+
+	article{
+		width: auto;
+	}
+	
+}
+
+@media screen and (max-width: 660px) {
+	article{
+
+		img{
+			width: 480px;
+		}
+
+		time{
+			float: left;
+			clear: left;
+		}
+
+	}
+}
+
+@media screen and (max-width: 490px) {
+	article{
+
+		img{
+			width: 300px;
+		}
+
+	}
 }
