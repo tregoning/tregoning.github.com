@@ -248,7 +248,17 @@ article{
 	}
 }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 500px) {
+	article{
+
+		img{
+			width: 460px;
+		}
+
+	}
+}
+
+@media screen and (max-width: 479px) {
 	article{
 
 		img{
@@ -258,7 +268,7 @@ article{
 	}
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 320px) {
 
 	aside a{
 		font-size: 15px;
