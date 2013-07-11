@@ -227,7 +227,7 @@ article{
 	article{
 
 		img{
-			width: 480px;
+			width: 100%;
 		}
 
 		time{
@@ -244,26 +244,6 @@ article{
 			width: 100%;
 		}
 
-
-	}
-}
-
-@media screen and (max-width: 500px) {
-	article{
-
-		img{
-			width: 460px;
-		}
-
-	}
-}
-
-@media screen and (max-width: 479px) {
-	article{
-
-		img{
-			width: 300px;
-		}
 
 	}
 }
