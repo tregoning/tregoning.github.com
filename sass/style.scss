@@ -125,10 +125,21 @@ article{
 	p{
 		margin: 20px 0;
 	}
-	
+
 	&:last-of-type{
 		border-bottom: none;
 		padding-bottom: 25px;
+	}
+
+	.side-list{
+		display: block;
+		margin-bottom: 20px;
+		overflow: hidden;
+	}
+	.side-list li{
+		float: left;
+		margin-right: 10px;
+		font-weight: 500;
 	}
 }
 
