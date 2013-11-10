@@ -77,6 +77,15 @@ article{
 		margin-top: 40px;
 	}
 
+	a{
+		text-decoration: underline;
+		color: $black;
+
+		&:hover{
+			text-decoration: none;
+		}
+	}
+
 	img{
 		display: block;
 		margin: 20px auto;
@@ -103,6 +112,7 @@ article{
 
 		a{
 			color: $black;
+			text-decoration: none;
 		}
 	}
 	
