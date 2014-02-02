@@ -93,6 +93,13 @@ article{
 		width: 640px;
 	}
 
+	.tile{
+		width: 320px;
+		float: left;
+		clear: none;
+		margin: 0 20px;
+	}
+
 	small{
 		display: block;
 		text-align: right;
@@ -265,6 +272,10 @@ article{
 			width: 100%;
 		}
 
+		.tile{
+			float:none;
+			margin:0 auto;
+		}
 
 	}
 }
@@ -273,6 +284,12 @@ article{
 
 	aside a{
 		font-size: 15px;
+	}
+
+	article {
+		.tile{
+			width: 100%;
+		}
 	}
 
 	#me{

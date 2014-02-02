@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'> 
+	<title>HTML5 clone of Facebook's Paper photo tilt gesture/UX</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="HTML5 clone of Facebook's Paper photo tilt gesture/UX">
+	<link rel="canonical" href="http://jt.io/2014/photo-tilt/">
+	<link rel="stylesheet" href="/css/style.css" />
+	<script>
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-121048-4']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!--[if lt IE 9]> <script src="/html5.js"></script> <![endif]-->
+</head>
+<body>
+	<header>
+		<h1>John Tregoning</h1>
+		<h2>Blog</h2>
+	</header>
+	<aside>
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="https://twitter.com/tregoning">Twitter</a></li>
+			<li><a href="https://github.com/tregoning">Github</a></li>
+			<li><a href="http://flic.kr/johnniewalker">Flickr</a></li>
+		</ul>
+	</aside>
+	<article>
+		<header class="cf">
+			<h1>Facebook's Paper photo tilt feature in HTML5</h1>
+			<time datetime="2014-02-01" pubdate>February 01, 2014</time>
+		</header>
+
+		<p>Facebook will be releasing their new <a href="http://newsroom.fb.com/News/793/Introducing-Paper-Stories-from-Facebook">Paper</a> app in a few days. After watching their <a href="https://vimeo.com/85421325">preview video</a> I was struck by the new gestures/UX it introduced.</p>
+
+		<img class="tile" src="http://s3.jt.io/tilt.gif" alt="Facebook's Paper app in action" />
+
+        <p>While watching the video, I was thinking how I could replicate some of its features using plain HTML, CSS and Javascript.</p>
+        <p>I decided to start with the photo tilt feature, it turned out to be relatively simple to implement (at least based on what I have seen in the video)</p>
+        <p>I just pushed to Github a tool/hack called <a href="https://github.com/tregoning/photoTilt">PhotoTilt</a> which, given a photo and a container, will replicate Paper's tilt functionality.</p>
+        <p>One advantage that native currently has over the mobile web is that there is no way to stop the device from changing orientation (portrait/landscape) when tilting too much.
+           There is an experimental feature: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Screen.lockOrientation">Screen.lockOrientation</a> but currently only works in Firefox for web pages that are in full-screen mode.</p>
+        <p>Finally, here is a working <a href="http://s3.jt.io/tilt/index.html">demo</a>. Make sure you test this on a device with a triaxial/accelerometer, like a phone/tablet, with orientation locked in portrait mode.</p>
+	</article>
+	<div id="disqus_thread"></div>
+    <script>
+        var disqus_shortname = 'tregoning',
+        	disqus_identifier = '/photo-tilt/';
+        (function() {
+            var dsq = document.createElement('script');dsq.async = true;
+            dsq.src = 'http://tregoning.disqus.com/embed.js';
+            document.body.appendChild(dsq);
+        })();
+    </script>
+</body>
+</html>
