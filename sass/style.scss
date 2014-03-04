@@ -153,14 +153,23 @@ article{
 		margin-bottom: 20px;
 		overflow: hidden;
 	}
+
 	.side-list li{
 		float: left;
 		margin-right: 10px;
 		font-weight: 500;
 	}
+
+	.comments{
+		text-decoration: none;
+		font-weight: 500;
+		font-size: 15px;
+	}
 }
 
 #disqus_thread{
+	float: left;
+	width: $articleWidth;
 	margin-top: 10px;
 	margin-right: 160px;
 }
@@ -248,7 +257,10 @@ article{
 			max-width: 480px;
 		}
 	}
-	
+
+	#disqus_thread{
+		width: 100%;
+	}
 }
 
 @media screen and (max-width: 660px) {
