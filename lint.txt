@@ -1,2 +1,2 @@
 #!/bin/bash -
-curl -s https://raw.github.com/tregoning/Sgt-Donowitz/master/install.sh | sh
+curl -s https://raw.githubusercontent.com/tregoning/Sgt-Donowitz/master/install.sh | sh
