@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>bulletTime.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="bulletTime.js Web application that attempts to replicate the famous 'Bullet Time' FX from the Matrix movie">
+    <link rel="canonical" href="http://jt.io/2015/bullet-time/">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script>
+        	  var _gaq = _gaq || [];
+        	  _gaq.push(['_setAccount', 'UA-121048-4']);
+        	  _gaq.push(['_trackPageview']);
+
+        	  (function() {
+        	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        	  })();
+    </script>
+    <!--[if lt IE 9]>
+    <script src="/html5.js"></script> <![endif]-->
+</head>
+<body>
+<header>
+    <h1>John Tregoning</h1>
+
+    <h2>Blog</h2>
+</header>
+<aside>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="https://twitter.com/tregoning">Twitter</a></li>
+        <li><a href="https://github.com/tregoning">Github</a></li>
+        <li><a href="http://flic.kr/johnniewalker">Flickr</a></li>
+    </ul>
+</aside>
+<article>
+    <header class="cf">
+        <h1>Bullet Time SFX Using Nothing but Web Tech</h1>
+        <time datetime="2015-03-10" pubdate>March 10, 2015</time>
+    </header>
+
+    <p>
+        bulletTime.js is a web application that attempts to replicate the special effect
+        <a href="http://youtubeonrepeat.com/watch/?v=VxNiEEtYe4Q&from=58&to=62">'Bullet Time'</a>
+        famously introduced in the movie: The Matrix.
+    </p>
+
+    <img src="https://raw.githubusercontent.com/tregoning/bulletTime.js/master/client/img/demo.gif"
+         alt="Example output from bulleTime.js"/>
+
+    <p>
+        The proliferation of advanced web technologies mainly:
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia">getUserMedia/WebRTC</a> and
+        <a href="https://developer.mozilla.org/en-US/docs/WebSockets">Web Sockets</a> created a unique opportunity to
+        develop a web application that can potentially replicate the famous effect.
+    </p>
+
+    <p>
+        During <a href="http://techblog.netflix.com/2015/03/netflix-hack-day-winter-2015.html">Netflix's Hack Day</a>, I
+        had the opportunity to spend a few hours developing an early prototype of the concept. The main idea is to use
+        an array of laptops, and take advantage of their webcam, native display and connectivity features.
+    </p>
+
+    <p>
+        <h2>Infrastructure:</h2> The infrastructure is composed of:
+        <ul class="is-list">
+            <li>Multiple worker devices: Each worker device will take one photo per 'bullet time' FX scene</li>
+            <li>One master machine: Responsible for collating all the photos and generate the animated GIF. It also serves as a dashboard indicating the status of all the worker devices</li>
+            <li>One trigger device: This is how we tell all the worker devices when to take a photo.
+                (In the GIF above, if you look carefully, you will notice that I'm using my phone as the trigger device).</li>
+        </ul>
+    </p>
+
+    <p>
+        <img src="http://cl.ly/image/3v3c2m2x3513/Diagram.png" alt="bulletTime.js Infrastructure Diagram"/>
+        <small>Cool looking digram that doesn't tell you much</small>
+    </p>
+
+    <h2>First Challenge: Setup:</h2>
+
+    <p>
+        The physical setup of the machines is the trickiest part, the correct angle (pitch and yaw) for each device is
+        crucial (otherwise the effect is broken and you end up with something like <a href="http://s3.jt.io/bulletTime/misaligned.gif">this</a>)
+    </p>
+
+    <p>
+        The master machine needs to be aware of the position (index) of each worker (to be able to interlace the
+        photos in the correct order). In order to access its webcam each worker needs to grant access permission via the browser.
+    </p>
+
+    <p>
+        I attempted to solve some of these challenges by dynamically allocating the index to each worker/camera every time a worker page is loaded.
+        The page will display its index in a huge font that almost literally takes the whole screen
+        (i.e. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length#Viewport-percentage_lengths">100vh</a>).
+        Further each worker that gets added to the system is instantly displayed on the master dashboard. Said
+        dashboard also conveniently displays the status of each worker stating whether access to the webcam has been granted or not.
+
+        <h3>Setup example: (in this video all the workers are on the same machine, obviously when actually doing this, each worker needs to be on a different device)</h3>
+
+        <div class="is-video">
+            <iframe src="https://www.youtube.com/embed/vnvSgIaC6wE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </p>
+
+
+    <p>
+        <h2>Second Challenge: Synchronisation</h2>
+    </p>
+
+    <p>Triggering all the photos at the exact moment in all devices is paramount for the effect to work
+        (<a href="http://s3.jt.io/bulletTime/bad-timing.gif">here</a> is somewhat
+        comedic example of when there is a small delay between shots). Achieving synchronicity between all the machines turned out to be very difficult and it looks like <a href="http://queue.acm.org/detail.cfm?id=2745385">it's known to be a hard problem</a></p>
+
+    <p>I tried a few different techniques while trying to overcome this issue:</p>
+
+    <h3>Sound:</h3>
+
+    <p>I attempted to use sound as a trigger (in the hope to remove network latency/congestion out of the problem) I
+        ended up generating a <a href="http://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling">DTMF</a> tone on my trigger device and <a href="https://github.com/Ravenstine/goertzeljs">this</a> javascript implementation of the <a href="http://en.wikipedia.org/wiki/Goertzel_algorithm">Goertzel algorithm</a>
+        running on each worker device. The idea was to process the incoming audio from the microphone waiting for the specific DTMF tone. Unfortunately this proved to be the most unreliable method. Different machines processed
+        the incoming sound at vastly different speeds (I'm guessing due to CPU/microphone differences)</p>
+
+    <h3>NTP (Network Time Protocol)</h3>
+
+    <p>Another technique I attempted to use was relying on NTP. Basically giving the
+        machines a specific time in the near future (a couple of seconds) when they needed to take a shot. Unfortunately it looks like NTP
+        in practice does not provide millisecond level precision (at least over WIFI) </p>
+
+    <h3>Web Sockets</h3>
+
+    <p>This is the technique I ended up using, it was somewhat flaky since the devices were connected via WIFI and
+        as a result network traffic vastly affected how precise the synchronization was. But it did produce acceptable results even if it was not super reliable.</p>
+
+    <h3>Potential Alternatives:</h3>
+
+    <p>As explained, Web Sockets was the least crappy solution. There are a few more things that I would
+        like to try including:</p>
+    <ul class="is-list">
+        <li>Web Sockets over a wired connection: (get a small switch and connect all laptops using ethernet cables)</li>
+        <li>I was/am pretty bullish on relying on NTP solution, in theory it should be possible to sync machines in the
+            same LAN within a few milliseconds (or even better use <a href="http://en.wikipedia.org/wiki/Precision_Time_Protocol">PTP</a>)
+        </li>
+        <li>Instead of attempting to process the audio stream in order to detect a specific tone, use a much simpler
+            signal such as loudness.
+        </li>
+    </ul>
+
+    <p>
+        <h2>Third Challenge: Webcams</h2>
+    </p>
+
+    <p>While a quick trip to Netflix's IT department granted me with 7 Macs + mine (4 Retina Pros, 3 Air, 1 Pro 13... how cool is Netflix's IT department?) it turned
+        out the quality, color/hues, distortions were different (even within the same models).
+    </p>
+
+    <p>
+        This is most likely because the laptops were 'loaners' so they have been heavily used. Unfortunately I didn't notice this
+        while shooting, as a result I ended up manually removing the bad frames from the GIF after the fact).
+        Here are a few examples of bad frames, and how they affect the final
+        result: <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/good-frame.png">Reference Frame</a>, <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-quality.png">Bad quality/blurry Frame</a>, <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-colour-hue.png">Bad colour/hue</a> and final <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-result.gif">result</a> (including the bad frames)
+    </p>
+
+    <h2>Future</h2>
+
+    <p>There are a few things that I'm planning on improving in the near future. One of the most important ones is to modify what each worker screen displays. The idea is to show a
+        semi-transparent feed of what the direct sibling worker (n-1) device is seeing on top of its current camera feed. This will go a long way in making the setup easier and the final result less jumpy.
+    </p>
+
+    <p>Using phones would yield substantially better results for a few reasons: They have much better cameras
+        than laptops, it's easier to find several units of the exact same model/version and finally, it drastically reduces
+         the distance between the lenses (thus making a smoother effect)</p>
+
+    <p>
+        Mobile Android already supports the required web technologies, unfortunately Safari
+        <a href="http://caniuse.com/#feat=stream">does not</a>, leaving (at least for now) iPhones out of the fun.
+    </p>
+
+    <p>
+        Isn't the <a href="http://en.wikipedia.org/wiki/Open_Web">Open Web</a> awesome? This whole thing was designed, coded and field tested during a hack day.
+        I'm pretty sure that I can yield significantly better results with a few tweaks.
+        I will report back whenever I get some the time/opportunity to try again (if you try it, please let <a href="https://twitter.com/tregoning">me</a> know)
+    </p>
+
+    <p>
+        The source code for bulletTime.js is available in Github <a href="https://github.com/tregoning/bulletTime.js">here</a>, obviously pull-requests are welcome.
+    </p>
+</article>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_shortname  = 'tregoning',
+        disqus_identifier = '/bullet-time/';
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.async = true;
+        dsq.src = 'http://tregoning.disqus.com/embed.js';
+        document.body.appendChild(dsq);
+    })();
+</script>
+</body>
+</html>

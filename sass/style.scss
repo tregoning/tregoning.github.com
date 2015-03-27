@@ -86,7 +86,8 @@ article{
 		}
 	}
 
-	img{
+	img,
+    .is-video{
 		display: block;
 		margin: 20px auto;
 		clear: both;
@@ -165,6 +166,27 @@ article{
 		font-weight: 500;
 		font-size: 15px;
 	}
+}
+
+.is-video {
+  position: relative;
+  padding-bottom: 56.25%; //16 : 9 video aspect ratio
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+
+.is-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.is-list {
+  list-style: initial;
+  margin-left: 40px;
 }
 
 #disqus_thread{
@@ -266,7 +288,8 @@ article{
 @media screen and (max-width: 660px) {
 	article{
 
-		img{
+		img,
+        .is-video {
 			width: 100%;
 		}
 
