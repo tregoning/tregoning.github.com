@@ -40,7 +40,7 @@
 <article>
     <header class="cf">
         <h1>Bullet Time SFX Using Nothing but Web Tech</h1>
-        <time datetime="2015-03-10" pubdate>March 10, 2015</time>
+        <time datetime="2015-03-31" pubdate>March 31, 2015</time>
     </header>
 
     <p>
@@ -66,7 +66,7 @@
     </p>
 
     <p>
-        <h2>Infrastructure:</h2> The infrastructure is composed of:
+        <h2 class="is-prominent">Infrastructure:</h2> The infrastructure is composed of:
         <ul class="is-list">
             <li>Multiple worker devices: Each worker device will take one photo per 'bullet time' FX scene</li>
             <li>One master machine: Responsible for collating all the photos and generate the animated GIF. It also serves as a dashboard indicating the status of all the worker devices</li>
@@ -80,7 +80,7 @@
         <small>Cool looking digram that doesn't tell you much</small>
     </p>
 
-    <h2>First Challenge: Setup:</h2>
+    <h2 class="is-prominent">First Challenge: Setup:</h2>
 
     <p>
         The physical setup of the machines is the trickiest part, the correct angle (pitch and yaw) for each device is
@@ -106,10 +106,7 @@
         </div>
     </p>
 
-
-    <p>
-        <h2>Second Challenge: Synchronisation</h2>
-    </p>
+    <h2 class="is-prominent">Second Challenge: Synchronisation</h2>
 
     <p>Triggering all the photos at the exact moment in all devices is paramount for the effect to work
         (<a href="http://s3.jt.io/bulletTime/bad-timing.gif">here</a> is somewhat
@@ -119,7 +116,7 @@
 
     <h3>Sound:</h3>
 
-    <p>I attempted to use sound as a trigger (in the hope to remove network latency/congestion out of the problem) I
+    <p>I attempted to use sound as a trigger (in the hope of removing network latency/congestion from the problem) I
         ended up generating a <a href="http://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling">DTMF</a> tone on my trigger device and <a href="https://github.com/Ravenstine/goertzeljs">this</a> javascript implementation of the <a href="http://en.wikipedia.org/wiki/Goertzel_algorithm">Goertzel algorithm</a>
         running on each worker device. The idea was to process the incoming audio from the microphone waiting for the specific DTMF tone. Unfortunately this proved to be the most unreliable method. Different machines processed
         the incoming sound at vastly different speeds (I'm guessing due to CPU/microphone differences)</p>
@@ -132,8 +129,8 @@
 
     <h3>Web Sockets</h3>
 
-    <p>This is the technique I ended up using, it was somewhat flaky since the devices were connected via WIFI and
-        as a result network traffic vastly affected how precise the synchronization was. But it did produce acceptable results even if it was not super reliable.</p>
+    <p>This is the technique I ended up using. It was somewhat flaky since the devices were connected via WIFI and
+        as a result network traffic vastly affected how precise the synchronization was. It did however produce acceptable results even if it was not super reliable.</p>
 
     <h3>Potential Alternatives:</h3>
 
@@ -141,7 +138,7 @@
         like to try including:</p>
     <ul class="is-list">
         <li>Web Sockets over a wired connection: (get a small switch and connect all laptops using ethernet cables)</li>
-        <li>I was/am pretty bullish on relying on NTP solution, in theory it should be possible to sync machines in the
+        <li>I was/am pretty bullish on relying on NTP solution. In theory it should be possible to sync machines in the
             same LAN within a few milliseconds (or even better use <a href="http://en.wikipedia.org/wiki/Precision_Time_Protocol">PTP</a>)
         </li>
         <li>Instead of attempting to process the audio stream in order to detect a specific tone, use a much simpler
@@ -149,9 +146,7 @@
         </li>
     </ul>
 
-    <p>
-        <h2>Third Challenge: Webcams</h2>
-    </p>
+    <h2 class="is-prominent">Third Challenge: Webcams</h2>
 
     <p>While a quick trip to Netflix's IT department granted me with 7 Macs + mine (4 Retina Pros, 3 Air, 1 Pro 13... how cool is Netflix's IT department?) it turned
         out the quality, color/hues, distortions were different (even within the same models).
@@ -164,7 +159,7 @@
         result: <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/good-frame.png">Reference Frame</a>, <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-quality.png">Bad quality/blurry Frame</a>, <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-colour-hue.png">Bad colour/hue</a> and final <a href="http://s3.jt.io.s3.amazonaws.com/bulletTime/bad-result.gif">result</a> (including the bad frames)
     </p>
 
-    <h2>Future</h2>
+    <h2 class="is-prominent">Future</h2>
 
     <p>There are a few things that I'm planning on improving in the near future. One of the most important ones is to modify what each worker screen displays. The idea is to show a
         semi-transparent feed of what the direct sibling worker (n-1) device is seeing on top of its current camera feed. This will go a long way in making the setup easier and the final result less jumpy.
@@ -186,7 +181,7 @@
     </p>
 
     <p>
-        The source code for bulletTime.js is available in Github <a href="https://github.com/tregoning/bulletTime.js">here</a>, obviously pull-requests are welcome.
+        Finally here are a few photos of the <a href="https://www.flickr.com/gp/johnniewalker/8DSWB6">actual</a>, <a href="https://www.flickr.com/gp/johnniewalker/PD1T70">setup</a> and a "best of" <a href="https://www.flickr.com/photos/johnniewalker/16735544155/">video</a>. The source code for bulletTime.js is available in Github <a href="https://github.com/tregoning/bulletTime.js">here</a>, obviously pull-requests are welcome.
     </p>
 </article>
 <div id="disqus_thread"></div>
